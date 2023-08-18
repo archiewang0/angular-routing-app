@@ -1,0 +1,20 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "git.autofetch": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.configPath": "./.prettierrc",
+    "editor.formatOnSave": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.tabWidth": 4,
+
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "prettier.printWidth": 120,
+    "prettier.trailingComma": "es5",
+}
+
