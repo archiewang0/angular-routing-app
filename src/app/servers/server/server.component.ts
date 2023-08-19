@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
     selector: 'app-server',
@@ -18,7 +18,20 @@ export class ServerComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.server = this.serversService.getServer(1);
+        // 取出 queryParams 的ID
+        const id = +this.route.snapshot.queryParams['id'];
+        this.server = this.serversService.getServer(id);
+
+        // console.log(this.server);
+
+        // 註冊事件 監聽Params 是否資料有無改變
+        // 如果改變的話 會觸發事件發生
+        this.route.params.subscribe((params: Params) => {
+            console.log('check Params: ', params);
+            this.server = this.serversService.getServer(+params['id']);
+
+            console.log('check this.server: ', this.server);
+        });
     }
 
     onReload() {
