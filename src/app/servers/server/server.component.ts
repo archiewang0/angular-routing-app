@@ -19,7 +19,11 @@ export class ServerComponent implements OnInit {
 
     ngOnInit() {
         // 取出 queryParams 的ID
-        const id = +this.route.snapshot.queryParams['id'];
+        const id = +this.route.snapshot.params['id'];
+        console.log('查看 queryParmas: ', this.route.snapshot.queryParams);
+        console.log('查看 queryParmas: ', this.route.snapshot.params);
+        console.log('查看 queryParmas: ', this.route.snapshot.fragment);
+        // alert('id: ' + id);
         this.server = this.serversService.getServer(id);
 
         // console.log(this.server);
@@ -35,6 +39,13 @@ export class ServerComponent implements OnInit {
     }
 
     onReload() {
-        this.router.navigate(['servers'], { relativeTo: this.route });
+        // this.router.navigate(['servers', this.server.id, 'edit'], {
+        //     relativeTo: this.route,
+        // });
+
+        this.router.navigate(['edit'], {
+            relativeTo: this.route,
+            queryParamsHandling: 'preserve',
+        });
     }
 }
