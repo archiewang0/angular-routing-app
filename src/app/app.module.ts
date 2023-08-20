@@ -11,6 +11,7 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { Routes, RouterModule } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 // 路徑會成為 localhost:4200/users
 const appRoutes: Routes = [
@@ -29,6 +30,8 @@ const appRoutes: Routes = [
             { path: ':id/edit', component: EditServerComponent },
         ],
     },
+    { path: 'not-found', component: PageNotFoundComponent },
+    { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({
