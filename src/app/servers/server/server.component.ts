@@ -20,9 +20,10 @@ export class ServerComponent implements OnInit {
     ngOnInit() {
         // 取出 queryParams 的ID
         const id = +this.route.snapshot.params['id'];
-        console.log('查看 queryParmas: ', this.route.snapshot.queryParams);
-        console.log('查看 queryParmas: ', this.route.snapshot.params);
-        console.log('查看 queryParmas: ', this.route.snapshot.fragment);
+        // console.log('查看 queryParmas: ', this.route.snapshot.queryParams);
+        // console.log('查看 queryParmas: ', this.route.snapshot.params);
+        // console.log('查看 queryParmas: ', this.route.snapshot.fragment);
+
         // alert('id: ' + id);
         this.server = this.serversService.getServer(id);
 
@@ -31,10 +32,10 @@ export class ServerComponent implements OnInit {
         // 註冊事件 監聽Params 是否資料有無改變
         // 如果改變的話 會觸發事件發生
         this.route.params.subscribe((params: Params) => {
-            console.log('check Params: ', params);
+            // console.log('check Params: ', params);
             this.server = this.serversService.getServer(+params['id']);
 
-            console.log('check this.server: ', this.server);
+            // console.log('check this.server: ', this.server);
         });
     }
 

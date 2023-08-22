@@ -13,26 +13,32 @@ import { ServersService } from './servers/servers.service';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+import { AppRoutingModule } from './app.routing';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
+import { CanDeactivateGuard } from './servers/edit-server/can-deactivate.guard.';
+
 // 路徑會成為 localhost:4200/users
-const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    {
-        path: 'users',
-        component: UsersComponent,
-        children: [{ path: ':id/:name', component: UserComponent }],
-    },
-    // { path: 'users/:id/:name', component: UserComponent },
-    {
-        path: 'servers',
-        component: ServersComponent,
-        children: [
-            { path: ':id', component: ServerComponent },
-            { path: ':id/edit', component: EditServerComponent },
-        ],
-    },
-    { path: 'not-found', component: PageNotFoundComponent },
-    { path: '**', redirectTo: '/not-found' },
-];
+// 搬移到 app-routing.module config檔案
+// const appRoutes: Routes = [
+//     { path: '', component: HomeComponent },
+//     {
+//         path: 'users',
+//         component: UsersComponent,
+//         children: [{ path: ':id/:name', component: UserComponent }],
+//     },
+//     // { path: 'users/:id/:name', component: UserComponent },
+//     {
+//         path: 'servers',
+//         component: ServersComponent,
+//         children: [
+//             { path: ':id', component: ServerComponent },
+//             { path: ':id/edit', component: EditServerComponent },
+//         ],
+//     },
+//     { path: 'not-found', component: PageNotFoundComponent },
+//     { path: '**', redirectTo: '/not-found' },
+// ];
 
 @NgModule({
     declarations: [
@@ -44,8 +50,8 @@ const appRoutes: Routes = [
         EditServerComponent,
         ServerComponent,
     ],
-    imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
-    providers: [ServersService],
+    imports: [BrowserModule, FormsModule, AppRoutingModule],
+    providers: [ServersService, AuthService, AuthGuard, CanDeactivateGuard],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
