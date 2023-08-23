@@ -10,6 +10,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate.guard.';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { ServerResolver } from './servers/server/server.resolver';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -25,7 +27,13 @@ const appRoutes: Routes = [
         canActivateChild: [AuthGuard],
         canActivate: [AuthGuard],
         children: [
-            { path: ':id', component: ServerComponent },
+            {
+                // data 的資料會指向 { server }
+                resolve: { server: ServerResolver },
+
+                path: ':id',
+                component: ServerComponent,
+            },
             {
                 path: ':id/edit',
                 canDeactivate: [CanDeactivateGuard],
@@ -33,7 +41,12 @@ const appRoutes: Routes = [
             },
         ],
     },
-    { path: 'not-found', component: PageNotFoundComponent },
+    // { path: 'not-found', component: PageNotFoundComponent },
+    {
+        path: 'not-found',
+        component: ErrorPageComponent,
+        data: { message: '測試內容~' }, // 靜態資料內容
+    },
     { path: '**', redirectTo: '/not-found' },
 ];
 

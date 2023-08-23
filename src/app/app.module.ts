@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app.routing';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { CanDeactivateGuard } from './servers/edit-server/can-deactivate.guard.';
+import { ServerResolver } from './servers/server/server.resolver';
 
 // 路徑會成為 localhost:4200/users
 // 搬移到 app-routing.module config檔案
@@ -51,7 +52,13 @@ import { CanDeactivateGuard } from './servers/edit-server/can-deactivate.guard.'
         ServerComponent,
     ],
     imports: [BrowserModule, FormsModule, AppRoutingModule],
-    providers: [ServersService, AuthService, AuthGuard, CanDeactivateGuard],
+    providers: [
+        ServersService,
+        AuthService,
+        AuthGuard,
+        CanDeactivateGuard,
+        ServerResolver,
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
